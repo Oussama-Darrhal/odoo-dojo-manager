@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <menuitem id="menu_dojo_root" name="Dojo Manager"
+            web_icon="dojo_manager,static/description/icon.png" />
+
+        <menuitem id="menu_dojo_operations" name="Operations" parent="menu_dojo_root" sequence="10" />
+
+        <menuitem id="menu_member_action" name="Members" parent="menu_dojo_operations"
+            action="action_dojo_member" sequence="10" />
+        <menuitem id="menu_membership_action" name="Subscriptions" parent="menu_dojo_operations"
+            action="action_dojo_membership" sequence="20" />
+
+        <menuitem id="menu_dojo_config" name="Configuration" parent="menu_dojo_root" sequence="100" />
+
+        <menuitem id="menu_membership_type_action" name="Membership Plans" parent="menu_dojo_config"
+            action="action_membership_type" />
+    </data>
+</odoo>

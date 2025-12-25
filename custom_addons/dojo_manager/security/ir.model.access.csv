@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_dojo_member,dojo.member,model_dojo_member,base.group_user,1,1,1,1
+access_dojo_membership,dojo.membership,model_dojo_membership,base.group_user,1,1,1,1
+access_dojo_membership_type,dojo.membership.type,model_dojo_membership_type,base.group_user,1,1,1,1

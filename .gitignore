@@ -1,0 +1,12 @@
+# Odoo specific
+*.pyc
+__pycache__/
+
+# Docker volumes (NEVER UPLOAD THESE)
+odoo-web-data/
+odoo-db-data/
+postgres-data/
+
+# System files
+.DS_Store
+.vscode/
