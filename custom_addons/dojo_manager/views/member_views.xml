@@ -6,9 +6,9 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="name" />
-                    <field name="belt_level" widget="badge" decoration-info="belt_level == 'white'"
+                    <field name="belt_level" widget="badge"
                         decoration-warning="belt_level == 'yellow'"
-                        decoration-success="belt_level == 'green'" />
+                        decoration-danger="belt_level == 'black'" />
                     <field name="birth_date" />
                 </tree>
             </field>
@@ -19,22 +19,42 @@
             <field name="model">dojo.member</field>
             <field name="arch" type="xml">
                 <form>
+                    <header>
+                        <button name="action_open_certificate" string="Print Certificate"
+                            type="object" class="oe_highlight" icon="fa-print" />
+                    </header>
+
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_memberships" type="object"
+                                class="oe_stat_button" icon="fa-id-card">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="membership_count" />
+                                    </span>
+                                    <span class="o_stat_text">Memberships</span>
+                                </div>
+                            </button>
+                        </div>
+
                         <field name="image" widget="image" class="oe_avatar" />
                         <div class="oe_title">
                             <h1>
-                                <field name="name" placeholder="Member Name" />
+                                <field name="name" />
                             </h1>
                         </div>
                         <group>
                             <group>
                                 <field name="belt_level" />
+                            </group>
+                            <group>
                                 <field name="birth_date" />
                             </group>
                         </group>
+
                         <notebook>
-                            <page string="Memberships">
-                                <field name="membership_ids" />
+                            <page string="History">
+                                <field name="membership_ids" readonly="1" />
                             </page>
                         </notebook>
                     </sheet>
@@ -50,7 +70,7 @@
         <record id="action_dojo_member" model="ir.actions.act_window">
             <field name="name">Members</field>
             <field name="res_model">dojo.member</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,kanban</field>
         </record>
     </data>
 </odoo>

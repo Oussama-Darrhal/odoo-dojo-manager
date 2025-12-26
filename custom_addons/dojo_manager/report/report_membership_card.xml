@@ -1,72 +1,96 @@
 <odoo>
     <data>
         <record id="action_report_membership_card" model="ir.actions.report">
-            <field name="name">Membership Card</field>
+            <field name="name">Membership Certificate</field>
             <field name="model">dojo.member</field>
-            <field name="report_type">qweb-pdf</field>
-            <field name="report_name">dojo_manager.report_membership_card_template</field>
-            <field name="report_file">dojo_manager.report_membership_card_template</field>
-            <field name="print_report_name">'Member_Card_%s' % object.name</field>
-            <field name="binding_model_id" ref="model_dojo_member" />
-            <field name="binding_type">report</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">dojo_manager.report_membership_certificate_template</field>
+            <field name="report_file">dojo_manager.report_membership_certificate_template</field>
+            <field name="print_report_name">'Certificate_%s' % object.name</field>
         </record>
 
-        <template id="report_membership_card_template">
+        <template id="report_membership_certificate_template">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
                     <t t-call="web.basic_layout">
                         <div class="page">
 
-                            <div style="width: 100%; text-align: center; margin-top: 50px;">
-                                <h2>Dojo Membership System</h2>
-                                <p>This document certifies the active membership of:</p>
-                            </div>
-
                             <div
-                                style="border: 2px solid #333; border-radius: 15px; width: 450px; height: 280px; margin: 0 auto; padding: 20px; background-color: #f8f9fa; position: relative; box-shadow: 5px 5px 15px #aaa;">
+                                style="
+                                width: 100%; 
+                                min-height: 900px; 
+                                padding: 40px; 
+                                border: 10px double #333; 
+                                position: relative; 
+                                background-color: #fff;
+                                font-family: 'Georgia', serif;
+                                color: #333;
+                            ">
 
-                                <div
-                                    style="border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 15px;">
-                                    <strong style="font-size: 24px; color: #d9534f;">DOJO FIGHT CLUB</strong>
-                                    <span style="float: right; font-size: 14px; margin-top: 8px;">MEMBER
-                                        ID</span>
+                                <div style="text-align: center; margin-bottom: 60px;">
+                                    <h1
+                                        style="font-size: 60px; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 10px;">DOJO
+                                        FIGHT CLUB</h1>
+                                    <div
+                                        style="border-bottom: 2px solid #d9534f; width: 200px; margin: 0 auto;"></div>
+                                    <p
+                                        style="font-size: 18px; margin-top: 10px; color: #777; font-style: italic;">Official
+                                        Membership Record</p>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-8">
-                                        <h3 style="margin: 0; color: #333;">
-                                            <span t-field="doc.name" />
-                                        </h3>
-                                        <div style="margin-top: 10px;">
-                                            <strong>Belt Rank:</strong>
-                                            <span t-field="doc.belt_level" />
-                                        </div>
-                                        <div style="margin-top: 5px;">
-                                            <strong>Joined:</strong>
-                                            <span t-field="doc.create_date"
-                                                t-options='{"widget": "date"}' />
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <img t-if="doc.image" t-att-src="image_data_uri(doc.image)"
-                                            style="width: 90px; height: 90px; border-radius: 50%; border: 2px solid #666;" />
+                                <div style="text-align: center; margin-top: 50px;">
+                                    <p style="font-size: 24px;">This is to certify that</p>
+
+                                    <h2
+                                        style="font-size: 50px; font-weight: bold; margin: 30px 0; color: #000; text-decoration: underline decoration-dotted #aaa;">
+                                        <span t-field="doc.name" />
+                                    </h2>
+
+                                    <p style="font-size: 24px;">is a registered member holding the
+                                        rank of</p>
+
+                                    <div
+                                        style="margin: 30px auto; display: inline-block; padding: 10px 40px; background-color: #f8f9fa; border: 1px solid #ddd; border-radius: 5px;">
+                                        <h3
+                                            style="font-size: 35px; margin: 0; color: #d9534f; text-transform: uppercase;">
+                                            <span t-field="doc.belt_level" /> BELT </h3>
                                     </div>
                                 </div>
 
-                                <div
-                                    style="position: absolute; bottom: 20px; width: 100%; left: 0; padding: 0 20px;">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <small style="color: #777;">Authorized Signature</small>
-                                            <div
-                                                style="border-bottom: 1px solid #777; width: 80%; margin-top: 20px;"></div>
-                                        </div>
-                                        <div class="col-6" style="text-align: right;">
-                                            <img
-                                                t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', doc.name, 100, 100)"
-                                                style="width: 70px; height: 70px;" />
-                                        </div>
-                                    </div>
+                                <div style="margin-top: 80px; padding: 0 50px;">
+                                    <table style="width: 100%;">
+                                        <tr>
+                                            <td style="width: 33%; vertical-align: bottom;">
+                                                <p style="font-size: 16px; margin-bottom: 5px;">
+                                                    <strong>Member Since:</strong>
+                                                    <span t-field="doc.create_date"
+                                                        t-options='{"widget": "date"}' />
+                                                </p>
+                                                <p style="font-size: 16px;"><strong>Status:</strong>
+                                                    Active</p>
+                                            </td>
+
+                                            <td
+                                                style="width: 33%; text-align: center; vertical-align: bottom;">
+                                                <div
+                                                    style="width: 120px; height: 120px; border: 4px solid #d9534f; border-radius: 50%; margin: 0 auto; line-height: 110px; color: #d9534f; font-weight: bold; font-size: 18px; transform: rotate(-15deg); opacity: 0.8;">
+                                                    OFFICIAL
+                                                </div>
+                                            </td>
+
+                                            <td
+                                                style="width: 33%; text-align: right; vertical-align: bottom;">
+                                                <div
+                                                    style="border: 1px solid #ddd; padding: 10px; display: inline-block; background: white;">
+                                                    <div t-field="doc.name"
+                                                        t-options="{'widget': 'barcode', 'symbology': 'QR', 'width': 120, 'height': 120}" />
+                                                    <div
+                                                        style="font-size: 10px; text-align: center; margin-top: 5px; color: #999;">SCAN
+                                                        TO VERIFY</div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
 
                             </div>
