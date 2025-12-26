@@ -1,0 +1,79 @@
+<odoo>
+    <data>
+        <record id="action_report_membership_card" model="ir.actions.report">
+            <field name="name">Membership Card</field>
+            <field name="model">dojo.member</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">dojo_manager.report_membership_card_template</field>
+            <field name="report_file">dojo_manager.report_membership_card_template</field>
+            <field name="print_report_name">'Member_Card_%s' % object.name</field>
+            <field name="binding_model_id" ref="model_dojo_member" />
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="report_membership_card_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.basic_layout">
+                        <div class="page">
+
+                            <div style="width: 100%; text-align: center; margin-top: 50px;">
+                                <h2>Dojo Membership System</h2>
+                                <p>This document certifies the active membership of:</p>
+                            </div>
+
+                            <div
+                                style="border: 2px solid #333; border-radius: 15px; width: 450px; height: 280px; margin: 0 auto; padding: 20px; background-color: #f8f9fa; position: relative; box-shadow: 5px 5px 15px #aaa;">
+
+                                <div
+                                    style="border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 15px;">
+                                    <strong style="font-size: 24px; color: #d9534f;">DOJO FIGHT CLUB</strong>
+                                    <span style="float: right; font-size: 14px; margin-top: 8px;">MEMBER
+                                        ID</span>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h3 style="margin: 0; color: #333;">
+                                            <span t-field="doc.name" />
+                                        </h3>
+                                        <div style="margin-top: 10px;">
+                                            <strong>Belt Rank:</strong>
+                                            <span t-field="doc.belt_level" />
+                                        </div>
+                                        <div style="margin-top: 5px;">
+                                            <strong>Joined:</strong>
+                                            <span t-field="doc.create_date"
+                                                t-options='{"widget": "date"}' />
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <img t-if="doc.image" t-att-src="image_data_uri(doc.image)"
+                                            style="width: 90px; height: 90px; border-radius: 50%; border: 2px solid #666;" />
+                                    </div>
+                                </div>
+
+                                <div
+                                    style="position: absolute; bottom: 20px; width: 100%; left: 0; padding: 0 20px;">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <small style="color: #777;">Authorized Signature</small>
+                                            <div
+                                                style="border-bottom: 1px solid #777; width: 80%; margin-top: 20px;"></div>
+                                        </div>
+                                        <div class="col-6" style="text-align: right;">
+                                            <img
+                                                t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', doc.name, 100, 100)"
+                                                style="width: 70px; height: 70px;" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -27,6 +27,7 @@ Long description of module's purpose
         'views/membership_views.xml',
         'views/membership_type_views.xml',
         'views/menus.xml',
+        'report/report_membership_card.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
