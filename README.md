@@ -18,4 +18,4 @@ A custom Odoo module designed for Martial Arts Schools to manage members, belt p
 3. Install `dojo_manager` from the Odoo Apps menu.
 
 ## 👥 Authors
-Built by **[Your Name]** & **[Yahya's Name]**.
+Built by **Oussama DARRHAL** & **Yahya AKLI**.
